@@ -4,20 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface NoteDao {
+interface WorkDao {
 
     @Insert
-    fun insert(note: Note)
+    fun insert(work: Work)
 
     @Query("SELECT * FROM note WHERE id LIKE :id")
-    fun getNote(id: Int): Note
+    fun getNote(id: Int): Work
 
     @Query("SELECT * FROM note")
-    fun getAllNotes(): LiveData<List<Note>>
+    fun getAllWork(): LiveData<List<Work>>
 
     @Update
-    fun update(note: Note)
+    fun update(work: Work)
 
     @Delete
-    fun delete(note: Note)
+    fun delete(work: Work)
 }

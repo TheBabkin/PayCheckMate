@@ -28,7 +28,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.stefanprvanovic.paycheckmate.database.Note
+import com.stefanprvanovic.paycheckmate.database.Work
 import com.stefanprvanovic.paycheckmate.ui.theme.PayCheckMateTheme
 
 class MainActivity : ComponentActivity() {
@@ -53,7 +53,7 @@ fun MainScreen() {
 }
 
 @Composable
-fun WorkCard(note: Note) {
+fun WorkCard(work: Work) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -64,7 +64,7 @@ fun WorkCard(note: Note) {
     ) {
         Column(modifier = Modifier.padding(10.dp)) {
             Text(
-                text = note.customerName,
+                text = work.customerName,
                 style = MaterialTheme.typography.h4,
                 fontWeight = FontWeight.Bold,
                 maxLines = 2,
@@ -72,7 +72,7 @@ fun WorkCard(note: Note) {
                 modifier = Modifier.fillMaxWidth()
             )
             Row(modifier = Modifier.fillMaxWidth()) {
-                Text(text = note.customerAddress, modifier = Modifier.weight(0.5f))
+                Text(text = work.customerAddress, modifier = Modifier.weight(0.5f))
                 Text(
                     text = "10:36, 23.05.2023",
                     textAlign = TextAlign.End,
@@ -81,7 +81,7 @@ fun WorkCard(note: Note) {
             }
 
             Text(
-                text = note.noteDescription,
+                text = work.workDescription,
                 style = MaterialTheme.typography.subtitle1,
                 fontWeight = FontWeight.Bold,
                 maxLines = 3,
@@ -109,7 +109,7 @@ fun WorkCard(note: Note) {
                             fontSize = 20.sp
                         )
                     ) {
-                        append(note.price.toString())
+                        append(work.price.toString())
                     }
                 }, modifier = Modifier.weight(0.2f))
 
@@ -118,7 +118,7 @@ fun WorkCard(note: Note) {
                     textAlign = TextAlign.End,
                     modifier = Modifier.weight(0.2f)
                 )
-                val color: Color = if (note.payed) Color.Green else Color.Red
+                val color: Color = if (work.payed) Color.Green else Color.Red
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -136,10 +136,10 @@ fun WorkCard(note: Note) {
 @Composable
 fun DefaultPreview() {
     PayCheckMateTheme {
-        NoteCard(
-            note = Note(
+        WorkCard(
+            work = Work(
                 customerName = "Stefan Prvanovic",
-                noteDescription = stringResource(id = R.string.lorem),
+                workDescription = stringResource(id = R.string.lorem),
                 customerAddress = "Cara Lazara 46, Cicevac",
                 dateTime = "10:38, 12.03.2023",
                 price = 100,
