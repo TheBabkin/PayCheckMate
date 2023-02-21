@@ -1,6 +1,6 @@
 package com.stefanprvanovic.paycheckmate.database
 
-import androidx.room.ColumnInfo
+import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 class Note {
 
     @PrimaryKey(autoGenerate = true)
-    //   @ColumnInfo(name = "noteId")
+    @NonNull
     val id: Int = 0
 
     val noteTitle: String = ""
