@@ -5,17 +5,16 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.stefanprvanovic.paycheckmate.database.Work
+import com.stefanprvanovic.paycheckmate.ui.components.CustomEditTextField
 import com.stefanprvanovic.paycheckmate.ui.theme.PayCheckMateTheme
 
-class MainActivity : ComponentActivity() {
+class WorkActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -25,24 +24,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainScreen()
+
                 }
             }
         }
     }
 }
 
+@Preview(name = "Light", showBackground = true, showSystemUi = true, uiMode = UI_MODE_NIGHT_NO)
+@Preview(name = "Dark", showBackground = true, showSystemUi = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
-fun MainScreen() {
-}
-
-
-
-@Preview(name= "Light", showBackground = true, uiMode = UI_MODE_NIGHT_NO)
-@Preview(name= "Dark", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun DefaultPreview() {
+fun WorkPreview() {
     PayCheckMateTheme {
-
+        Surface {
+        }
     }
 }

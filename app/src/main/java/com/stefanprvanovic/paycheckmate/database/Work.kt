@@ -8,10 +8,10 @@ data class Work(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    val customerName: String = "",
-    val workDescription: String = "",
+    val customer: String = "",
     val customerAddress: String = "",
+    val workDescription: String = "",
     val dateTime: String = "",
-    val price: Int = 0,
+    val price: String = "",
     val payed: Boolean = false
 )
