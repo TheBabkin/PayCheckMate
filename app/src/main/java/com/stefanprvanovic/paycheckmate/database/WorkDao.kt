@@ -5,14 +5,13 @@ import androidx.room.*
 
 @Dao
 interface WorkDao {
-
     @Insert
     fun insert(work: Work)
 
-    @Query("SELECT * FROM note WHERE id LIKE :id")
+    @Query("SELECT * FROM work WHERE id LIKE :id")
     fun getNote(id: Int): Work
 
-    @Query("SELECT * FROM note")
+    @Query("SELECT * FROM work")
     fun getAllWork(): LiveData<List<Work>>
 
     @Update

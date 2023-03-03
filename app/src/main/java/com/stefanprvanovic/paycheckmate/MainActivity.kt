@@ -7,15 +7,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
@@ -61,70 +63,33 @@ fun MainScreen(viewModel: ViewModel) {
 
     val allWork by viewModel.allWork.observeAsState(listOf())
 
-
-    LazyColumn {
-        items(allWork) { work ->
-            WorkCard(work = work)
+    Scaffold(floatingActionButton = {
+        ExtendedFloatingActionButton(
+            text = { Text(text = "Dodaj") },
+            onClick = { /*TODO*/ },
+            backgroundColor = Color.White,
+            contentColor = Color.Black,
+            icon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.baseline_construction_24),
+                    contentDescription = ""
+                )
+            }
+        )
+    }) {
+        LazyColumn(modifier = Modifier.padding(it)) {
+            items(allWork) {
+                WorkCard(work = it)
+            }
         }
     }
 }
 
 
 @Preview(name = "Light", showBackground = true, showSystemUi = true, uiMode = UI_MODE_NIGHT_NO)
-@Preview(name = "Dark", showBackground = true, showSystemUi = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun DefaultPreview() {
-    val workList: List<Work> = listOf(
-        Work(
-            customer = "Stefan Prvanovic",
-            workDescription = "Daleko je isto a jos dalje je i Srbija. Kada sredimo  ovu zemlju nece je niko prepoznati." +
-                    " Ovi prevaranti su daleko ludi. Mada nebo je iznad nas.",
-            customerAddress = "Cara Lazara 46, Cicevac",
-            dateTime = "10:38, 12.03.2023",
-            price = "100",
-            payed = false
-        ), Work(
-            customer = "Stefan Prvanovic",
-            workDescription = "Daleko je isto a jos dalje je i Srbija. Kada sredimo  ovu zemlju nece je niko prepoznati." +
-                    " Ovi prevaranti su daleko ludi. Mada nebo je iznad nas.",
-            customerAddress = "Cara Lazara 46, Cicevac",
-            dateTime = "10:38, 12.03.2023",
-            price = "100",
-            payed = false
-        ), Work(
-            customer = "Stefan Prvanovic",
-            workDescription = "Daleko je isto a jos dalje je i Srbija. Kada sredimo  ovu zemlju nece je niko prepoznati." +
-                    " Ovi prevaranti su daleko ludi. Mada nebo je iznad nas.",
-            customerAddress = "Cara Lazara 46, Cicevac",
-            dateTime = "10:38, 12.03.2023",
-            price = "100",
-            payed = false
-        ), Work(
-            customer = "Stefan Prvanovic",
-            workDescription = "Daleko je isto a jos dalje je i Srbija. Kada sredimo  ovu zemlju nece je niko prepoznati." +
-                    " Ovi prevaranti su daleko ludi. Mada nebo je iznad nas.",
-            customerAddress = "Cara Lazara 46, Cicevac",
-            dateTime = "10:38, 12.03.2023",
-            price = "100",
-            payed = false
-        ), Work(
-            customer = "Stefan Prvanovic",
-            workDescription = "Daleko je isto a jos dalje je i Srbija. Kada sredimo  ovu zemlju nece je niko prepoznati." +
-                    " Ovi prevaranti su daleko ludi. Mada nebo je iznad nas.",
-            customerAddress = "Cara Lazara 46, Cicevac",
-            dateTime = "10:38, 12.03.2023",
-            price = "100",
-            payed = false
-        )
-    )
-
     PayCheckMateTheme {
-        Surface {
-            LazyColumn {
-                items(workList) { work ->
-                    WorkCard(work = work)
-                }
-            }
-        }
+
     }
 }
