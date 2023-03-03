@@ -3,7 +3,7 @@ package com.stefanprvanovic.paycheckmate.database
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "note")
+@Entity(tableName = "work")
 data class Work(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,

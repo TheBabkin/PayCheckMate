@@ -10,13 +10,13 @@ import kotlinx.coroutines.launch
 class WorkRepository(private val workDao: WorkDao) {
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
 
-    fun insertNote(work: Work) {
+    fun insertWork(work: Work) {
         coroutineScope.launch(Dispatchers.IO) {
             workDao.insert(work)
         }
     }
 
-    fun getNote(id: Int): Work {
+    fun getWork(id: Int): Work {
         var work: Work = Work()
 
         coroutineScope.launch(Dispatchers.IO) {
@@ -26,15 +26,15 @@ class WorkRepository(private val workDao: WorkDao) {
         return work
     }
 
-    val allNotes: LiveData<List<Work>> = workDao.getAllWork()
+    val allWork: LiveData<List<Work>> = workDao.getAllWork()
 
-    fun updateNote(work: Work) {
+    fun updateWork(work: Work) {
         coroutineScope.launch(Dispatchers.IO) {
             workDao.update(work)
         }
     }
 
-    fun deleteNote(work: Work) {
+    fun deleteWork(work: Work) {
         coroutineScope.launch(Dispatchers.IO) {
             workDao.delete(work)
         }

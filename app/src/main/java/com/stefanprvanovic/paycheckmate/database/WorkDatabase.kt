@@ -21,7 +21,7 @@ abstract class WorkDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         WorkDatabase::class.java,
-                        "note_database.db"
+                        "work_database.db"
                     ).fallbackToDestructiveMigration().build()
                 }
 
