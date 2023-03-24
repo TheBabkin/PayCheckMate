@@ -7,10 +7,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.stefanprvanovic.paycheckmate.database.Work
 import com.stefanprvanovic.paycheckmate.ui.theme.PayCheckMateTheme
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WorkCard(work: Work) {
     Card(
@@ -35,8 +33,11 @@ fun WorkCard(work: Work) {
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(10.dp)
-            .clickable { },
-        elevation = 10.dp
+            .clickable {},
+        elevation = 10.dp,
+        onClick = {
+
+        }
     ) {
         Column(modifier = Modifier.padding(10.dp)) {
             Text(
@@ -50,7 +51,7 @@ fun WorkCard(work: Work) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(text = work.customerAddress, modifier = Modifier.weight(0.5f))
                 Text(
-                    text = "10:36, 23.05.2023",
+                    text = work.dateTime,
                     textAlign = TextAlign.End,
                     modifier = Modifier.weight(0.5f)
                 )

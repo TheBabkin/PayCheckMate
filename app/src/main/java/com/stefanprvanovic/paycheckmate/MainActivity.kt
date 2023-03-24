@@ -60,7 +60,7 @@ fun MainScreen(viewModel: ViewModel) {
             Home(viewModel = viewModel, navController = navController)
         }
         composable(NavRouts.Work.route) {
-            Work(navController = navController)
+            Work(viewModel = viewModel, navController = navController)
         }
     }
 }

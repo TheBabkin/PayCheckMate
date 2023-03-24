@@ -19,13 +19,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.stefanprvanovic.paycheckmate.NavRouts
+import com.stefanprvanovic.paycheckmate.ViewModel
 import com.stefanprvanovic.paycheckmate.ui.components.CustomEditTextField
 import com.stefanprvanovic.paycheckmate.ui.theme.PayCheckMateTheme
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Composable
-fun Work(navController: NavController) {
+fun Work(viewModel: ViewModel, navController: NavController) {
     //Kooperant
     var customer by remember { mutableStateOf("") }
     val onCustomerTextChange = { it: String ->
@@ -94,8 +96,21 @@ fun Work(navController: NavController) {
             Text(text = "Placeno ", fontWeight = FontWeight.Bold, fontSize = 20.sp)
             Checkbox(checked = payed, onCheckedChange = onPayedChange)
             Button(onClick = {
-                navController.navigate(NavRouts.Home.route) {
-                    popUpTo(NavRouts.Home.route)
+                if (customer.isNotEmpty() && workDescription.isNotEmpty()) {
+                    viewModel.insertWork(
+                        com.stefanprvanovic.paycheckmate.database.Work(
+                            customer = customer,
+                            customerAddress = customerAddress,
+                            workDescription = workDescription,
+                            dateTime = LocalDateTime.now()
+                                .format(DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy")),
+                            price = price,
+                            payed = payed
+                        )
+                    )
+                    navController.navigate(NavRouts.Home.route) {
+                        popUpTo(NavRouts.Home.route)
+                    }
                 }
             }) {
                 Text(text = "Sacuvaj")
@@ -109,7 +124,6 @@ fun Work(navController: NavController) {
 private fun WorkScreenPreview() {
     PayCheckMateTheme {
         Surface {
-            Work(navController = rememberNavController())
         }
     }
 }
