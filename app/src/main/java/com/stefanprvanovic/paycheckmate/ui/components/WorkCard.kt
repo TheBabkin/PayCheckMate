@@ -4,7 +4,6 @@ import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -25,89 +24,77 @@ import androidx.compose.ui.unit.sp
 import com.stefanprvanovic.paycheckmate.database.Work
 import com.stefanprvanovic.paycheckmate.ui.theme.PayCheckMateTheme
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WorkCard(work: Work) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(10.dp)
-            .clickable {},
-        elevation = 10.dp,
-        onClick = {
-
+    Column(modifier = Modifier.padding(10.dp)) {
+        Text(
+            text = work.customer,
+            style = MaterialTheme.typography.h4,
+            fontWeight = FontWeight.Bold,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Text(text = work.customerAddress, modifier = Modifier.weight(0.5f))
+            Text(
+                text = work.dateTime,
+                textAlign = TextAlign.End,
+                modifier = Modifier.weight(0.5f)
+            )
         }
-    ) {
-        Column(modifier = Modifier.padding(10.dp)) {
-            Text(
-                text = work.customer,
-                style = MaterialTheme.typography.h4,
-                fontWeight = FontWeight.Bold,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Text(text = work.customerAddress, modifier = Modifier.weight(0.5f))
-                Text(
-                    text = work.dateTime,
-                    textAlign = TextAlign.End,
-                    modifier = Modifier.weight(0.5f)
-                )
-            }
+
+        Text(
+            text = work.workDescription,
+            style = MaterialTheme.typography.subtitle1,
+            fontWeight = FontWeight.Bold,
+            maxLines = 3,
+            color = Color.Black,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.LightGray)
+                .border(BorderStroke(width = 1.dp, color = Color.Black))
+                .padding(5.dp)
+        )
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(0.dp, 10.dp, 0.dp, 0.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(buildAnnotatedString {
+                withStyle(style = SpanStyle()) {
+                    append("Cena: ")
+                }
+                withStyle(
+                    style = SpanStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+                ) {
+                    append(work.price.toString())
+                }
+            }, modifier = Modifier.weight(0.2f))
 
             Text(
-                text = work.workDescription,
-                style = MaterialTheme.typography.subtitle1,
-                fontWeight = FontWeight.Bold,
-                maxLines = 3,
-                color = Color.Black,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.LightGray)
-                    .border(BorderStroke(width = 1.dp, color = Color.Black))
-                    .padding(5.dp)
+                text = "Placeno: ",
+                textAlign = TextAlign.End,
+                modifier = Modifier.weight(0.2f)
             )
-
-            Row(
+            val color: Color = if (work.payed) Color.Green else Color.Red
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(0.dp, 10.dp, 0.dp, 0.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(buildAnnotatedString {
-                    withStyle(style = SpanStyle()) {
-                        append("Cena: ")
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 20.sp
-                        )
-                    ) {
-                        append(work.price.toString())
-                    }
-                }, modifier = Modifier.weight(0.2f))
-
-                Text(
-                    text = "Placeno: ",
-                    textAlign = TextAlign.End,
-                    modifier = Modifier.weight(0.2f)
-                )
-                val color: Color = if (work.payed) Color.Green else Color.Red
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(23.dp)
-                        .clip(CircleShape)
-                        .background(color)
-                        .weight(0.1f)
-                )
-            }
+                    .height(23.dp)
+                    .clip(CircleShape)
+                    .background(color)
+                    .weight(0.1f)
+            )
         }
     }
+
 }
 
 @Preview(name = "Light", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)

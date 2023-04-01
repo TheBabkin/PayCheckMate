@@ -16,8 +16,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.stefanprvanovic.paycheckmate.ui.screens.Home
-import com.stefanprvanovic.paycheckmate.ui.screens.Work
+import com.stefanprvanovic.paycheckmate.ui.screens.HomeScreen
+import com.stefanprvanovic.paycheckmate.ui.screens.WorkScreen
 import com.stefanprvanovic.paycheckmate.ui.theme.PayCheckMateTheme
 
 class MainActivity : ComponentActivity() {
@@ -57,10 +57,10 @@ fun MainScreen(viewModel: ViewModel) {
 
     NavHost(navController = navController, startDestination = NavRouts.Home.route) {
         composable(NavRouts.Home.route) {
-            Home(viewModel = viewModel, navController = navController)
+            HomeScreen(viewModel = viewModel, navController = navController)
         }
         composable(NavRouts.Work.route) {
-            Work(viewModel = viewModel, navController = navController)
+            WorkScreen(viewModel = viewModel, navController = navController)
         }
     }
 }

@@ -8,7 +8,7 @@ interface WorkDao {
     @Insert
     fun insert(work: Work)
 
-    @Query("SELECT * FROM work WHERE id LIKE :id")
+    @Query("SELECT * FROM work WHERE id = :id")
     fun getNote(id: Int): Work
 
     @Query("SELECT * FROM work")
