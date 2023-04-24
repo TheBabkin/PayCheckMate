@@ -9,3 +9,4 @@ Some of [Jetpack](https://developer.android.com/jetpack) libraries used in this 
 * [Room](https://developer.android.com/jetpack/androidx/releases/room)
 * [Compose](https://developer.android.com/jetpack/androidx/releases/compose)
 * [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation)
+* LiveData
